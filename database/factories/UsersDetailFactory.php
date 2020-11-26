@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\UsersDetail;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UsersDetailsFactory extends Factory
+class UsersDetailFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
