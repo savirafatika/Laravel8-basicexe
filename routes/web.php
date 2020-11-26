@@ -3,6 +3,21 @@
 use App\Http\Controllers\CrudController;
 use Illuminate\Support\Facades\Route;
 
+// Route::view('/dashboard', 'dashboard');
+// Route::view('/', 'page.auth.login');
+// Auth::routes();
+
+Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+Route::post('/', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
+    Route::get('/member', [App\Http\Controllers\MemberController::class, 'index']);
+});
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,9 +33,6 @@ use Illuminate\Support\Facades\Route;
 //     // return view('welcome');
 //     return "<h1>This is my first laravel project $id $aktif</h1>";
 // })->where('id', '[a-z]*');
-
-Route::view('/dashboard', 'dashboard');
-Route::view('/', 'page.auth.login');
 
 // Route::post('simpan', function () {
 //     return "data berhasil disimpan";
@@ -51,6 +63,3 @@ Route::view('/', 'page.auth.login');
 
 // Route::get('/home', [CrudController::class, 'index'])->name('dashboard');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
